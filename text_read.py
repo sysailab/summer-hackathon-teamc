@@ -1,6 +1,7 @@
 import fitz
 import os
-import time
+import tika
+
 path = "./input"
 
 
