@@ -53,7 +53,7 @@ class JournalMangaement :
             key, value = line.split(": ", 1)
             data[self.key[idx]] = value
         self.result_data.append(data)
-        print(data)
+
     
     def run_ai(self) : 
         for path in self.pdf_list : 

@@ -69,7 +69,7 @@ class Journal :
             check = page.lower().replace(" ", "")
             
             #사사문구 페이지
-            if "ackowledgments" in check or "감사의말" in check :
+            if "ackowledgment" in check or "감사의말" in check :
                 bac_data = page
                 break 
              
