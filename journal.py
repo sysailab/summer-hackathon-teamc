@@ -86,14 +86,5 @@ class Journal :
         #Open ai 사용 #data에 front Data 추가 
         pass
     
-jour = Journal("./test_data/sample1.pdf")
-jour.read_text()
-
-jour.check_data_type()
-if jour.data != "image" :
-    jour.image_to_text()    
-if jour.data_clensing_front() :
-    jour.data_clensing_back()
-    
-print(jour.data)
-    
+    def get_data(self) :
+        return self.data

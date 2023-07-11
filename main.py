@@ -1,13 +1,11 @@
 from journal import Journal
 from journal_manage import JournalMangaement
+from config import *
 
-jour = Journal("./test_data/sample1.pdf")
-jour.read_text()
+ai_key = OPENAI_KEY
+path = PATH
+model = "gpt-3.5-turbo"
+jour_manage = JournalMangaement(ai_key, model ,path)
 
-jour.check_data_type()
-if jour.data != "image" :
-    jour.image_to_text()    
-if jour.data_clensing_front() :
-    jour.data_clensing_back()
-    
-print(jour.data)
+jour_manage.set_journal_list()
+jour_manage.run_ai()
