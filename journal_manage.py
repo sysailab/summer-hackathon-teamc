@@ -1,6 +1,5 @@
 import openai
 import glob
-from journal import Journal
 
 class JournalMangaement :
     def __init__(self, ai_key, model, path):
