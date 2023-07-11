@@ -1,6 +1,6 @@
 import fitz
 import os
-import time
+
 path = "./input"
 
 
