@@ -1,6 +1,5 @@
 import fitz
 import os
-from tika import parser
 
 path = "./input"
 
