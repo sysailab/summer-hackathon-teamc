@@ -12,8 +12,9 @@ def convert_pdf_to_img(pdf_file):
     return convert_from_path(pdf_file)
 
 def convert_image_to_text(file):
-    config = "-l eng+jpn+kor+rus+chi_sim+vie+thai"
-    text = pytesseract.image_to_string(file, config=config)
+    # config = "-l eng+jpn+kor+rus+chi_sim+vie+thai"
+    text = pytesseract.image_to_string(file, lang="eng")
+    # text = pytesseract.image_to_string(file, config=config)
     return text
 
 def get_text_from_any_pdf(pdf_file):
