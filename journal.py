@@ -55,7 +55,7 @@ class Journal :
         #대소문자 구분 및 공백 제거
                 
         #앞에 사사문구가 있을경우
-        if "ackowledgments" in text or "감사의말" in text:
+        if "ackowledgments" in text or "감사의말" in text or self.type == "image":
             return False           
         
         self.data = self.data[:1300]
