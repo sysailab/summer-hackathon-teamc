@@ -2,7 +2,7 @@ from journal import Journal
 from journal_manage import JournalMangaement
 from config import *
 
-ai_key = OPENAI_KEY
+ai_key = OPENAI_MY_KEY
 path = PATH
 model = "gpt-3.5-turbo"
 jour_manage = JournalMangaement(ai_key, model ,path)
