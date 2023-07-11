@@ -30,7 +30,7 @@ class JournalMangaement :
         if journal.data_clensing_front() :
             journal.data_clensing_back()
                 
-        return journal.get_data() + "해당 글을 {self.first_q} \n지금 너에게 준 형식들로 맞춰서 나에게 알려줘\n"
+        return journal.get_data() + f"해당 글을 {self.first_q} \n지금 너에게 준 형식들로 맞춰서 나에게 알려줘\n"
         
     def input_text(self, data) :
         response = openai.ChatCompletion.create(
@@ -44,5 +44,7 @@ class JournalMangaement :
     def run_ai(self) : 
         for path in self.pdf_list : 
             content = self.set_ai_content(path)
-            result = self.input_text(content)
-            self.result_data.append({"path" : content, "data" : result})
+            print(f"\n\n {path}")
+            print(content)
+            # result = self.input_text(content)
+            #self.result_data.append({"path" : content, "data" : result})

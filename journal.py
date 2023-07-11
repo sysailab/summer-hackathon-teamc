@@ -58,10 +58,7 @@ class Journal :
         if "ackowledgments" in text or "감사의말" in text:
             return False           
         
-        #서론의 문구가 있을경우
-        if "서론" in text or "introduction" in text : 
-            #해당 문구 이전의 내용 삭제 추가 필요
-            return True
+        self.data = self.data[:1300]
         return True
     
     def data_clensing_back(self) : 
