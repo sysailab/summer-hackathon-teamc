@@ -1,7 +1,7 @@
 import fitz
 import os
 import time
-path = "./test_data"
+path = "./input"
 
 
 class text_read():
