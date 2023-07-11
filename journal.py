@@ -2,7 +2,7 @@ import fitz
 
 class Journal : 
     def __init__(self, path) :
-        self.type = "" #journal or abstract
+        self.type = "text" #journal or abstract
         self.data_type = "" #text or img
         
         self.data = "" #journal text
@@ -21,8 +21,12 @@ class Journal :
         doc = fitz.open(self.path)
         front, back, self.type = self.count(len(doc))
         
-        self.front = doc[:front]
-        self.back = doc[-back:]
+        text = []
+        for page in doc :
+            page = page.get_text()
+            text.append(page)
+        self.front = text[:front]
+        self.back = text[-back:]
         
     def count(self, page) :
         #1페이지, 2~3페이지, 10페이지 이하, 30페이지 이하, 이상
@@ -52,26 +56,44 @@ class Journal :
                 
         #앞에 사사문구가 있을경우
         if "ackowledgments" in text or "감사의말" in text:
-            return self.data            
+            return False           
         
-        #초록, 서론의 문구가 있을경우
+        #서론의 문구가 있을경우
         if "서론" in text or "introduction" in text : 
-            return self.data
+            #해당 문구 이전의 내용 삭제 추가 필요
+            return True
+        return True
     
     def data_clensing_back(self) : 
+        bac_data = ""
         for page in reversed(self.back) :
-            text = page.get_text()
-            check = text.lower().replace(" ", "")
+            
+            check = page.lower().replace(" ", "")
             
             #사사문구 페이지
             if "ackowledgments" in check or "감사의말" in check :
-                bac_data = text
+                bac_data = page
                 break 
              
             #참고 논문과 이전페이지만 봄        
-            if "reference" in check or "참고논문" in check :
-                bac_data = text
+            if "reference" in check or "참고" in check :
+                bac_data = page
                 continue
         
         self.data += bac_data
-         
+    
+    def image_to_text(self) :
+        #Open ai 사용 #data에 front Data 추가 
+        pass
+    
+jour = Journal("./test_data/sample1.pdf")
+jour.read_text()
+
+jour.check_data_type()
+if jour.data != "image" :
+    jour.image_to_text()    
+if jour.data_clensing_front() :
+    jour.data_clensing_back()
+    
+print(jour.data)
+    
