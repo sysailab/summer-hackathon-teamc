@@ -22,13 +22,14 @@ def get_text_from_any_pdf(pdf_file):
     images = convert_pdf_to_img(pdf_file)
     final_text = ""
     for pg, img in enumerate(images):
+        
         final_text += convert_image_to_text(img)
 
     return final_text
 
 path_to_pdf = './PDF/img_sample13.png'
-# print(get_text_from_any_pdf(path_to_pdf)) # pdf text 추출
-print(convert_image_to_text(path_to_pdf))
+print(get_text_from_any_pdf(path_to_pdf)) # pdf text 추출
+#print(convert_image_to_text(path_to_pdf))
 
 
 #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

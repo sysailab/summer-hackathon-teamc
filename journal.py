@@ -1,4 +1,7 @@
 import fitz
+from pdf2image import convert_from_path
+from pytesseract import *
+from PIL import Image
 
 class Journal : 
     def __init__(self, path) :
@@ -28,7 +31,7 @@ class Journal :
         self.front = text[:front]
         self.back = text[-back:]
         
-    def count(self, page) :
+    def count(self, page) : 
         #1페이지, 2~3페이지, 10페이지 이하, 30페이지 이하, 이상
         if page <= 1 :
             return (1, 0, "abstract")
@@ -36,10 +39,8 @@ class Journal :
             return (1, 1, "abstract")
         elif page <= 10 :
             return (3, 2, "journal")
-        elif page <= 30:
+        else:
             return (3, 5, "journal")
-        else :
-            return (3, 10, "journal")
     
     def check_data_type(self) :
         #Pdf : img or text
@@ -55,7 +56,7 @@ class Journal :
         #대소문자 구분 및 공백 제거
                 
         #앞에 사사문구가 있을경우
-        if "ackowledgments" in text or "감사의말" in text or self.type == "image":
+        if "ackowledgments" in text or "감사의말" in text or self.data_type == "image":
             return False           
         
         self.data = self.data[:1300]
@@ -79,9 +80,24 @@ class Journal :
         
         self.data += bac_data
     
+    def convert_image_to_text(self, file) :
+        text = pytesseract.image_to_string(file, lang="eng")
+        return text
+        
     def image_to_text(self) :
-        #Open ai 사용 #data에 front Data 추가 
-        pass
+        #Open ai 사용 #data에 front Data 추가
+        imgs = convert_from_path(self.path)
+        
+        print(type(imgs[0]))
+        self.data += self.convert_image_to_text(imgs[0])
+        
+        for img in reversed(imgs) :
+            data = self.convert_image_to_text(img)
+            text = data.lower().replace(" ", "")
+            if "reference" in text or "참고" in text :
+                self.data += data
+                break
+
     
     def get_data(self) :
         return self.data

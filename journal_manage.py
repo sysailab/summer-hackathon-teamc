@@ -45,10 +45,9 @@ class JournalMangaement :
             )
         return response.choices[0].message.content
     
-    def result_to_dictionary(self, path, result) : 
+    def result_to_dictionary(self, result) : 
         lines = result.split("\n")
         data = {}
-        data["path"] = path
         result = result.lower()
         for idx, line in enumerate(lines)  : 
             key, value = line.split(": ", 1)
@@ -60,7 +59,7 @@ class JournalMangaement :
         for path in self.pdf_list : 
             content = self.set_ai_content(path)
             result = self.input_text(content)
-            self.result_to_dictionary(path, result)
+            self.result_to_dictionary(result)
             
     def data_to_csv(self) :
         df = pd.DataFrame.from_records(self.result_data)
