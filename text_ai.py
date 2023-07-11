@@ -1,7 +1,7 @@
 import openai
-from config import OPENAI_MY_KEY
+from config import OPENAI_KEY
 
-openai.api_key = OPENAI_MY_KEY
+openai.api_key = OPENAI_KEY
 
 MODEL = "gpt-3.5-turbo"
 
