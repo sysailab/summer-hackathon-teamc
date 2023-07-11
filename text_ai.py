@@ -1,12 +1,13 @@
 import openai
 from config import OPENAI_MY_KEY
 
-openai.api_key = "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"
+openai.api_key = OPENAI_MY_KEY
 
 MODEL = "gpt-3.5-turbo"
 
 first_q = "1. 논문의 제목 \n-English : \n-Korean : \n\n\
-    2.저자명 \n-English : \n-Korean : "
+    2.저자명 \n-English : \n-Korean : \n\n\
+        3.저자소속 \n -Korean : \n"
 
 
 class text_ai():
