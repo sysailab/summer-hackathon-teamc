@@ -9,8 +9,10 @@ class JournalMangaement :
         self.path = path
         self.pdf_list = []
         self.result_data = []
-        self.first_q = "1. 논문의 제목 \n-English : \n-Korean : \n\n\
-            2.저자명 \n-English : \n-Korean : "
+        self.key = ["title-eng", "title-kor", "author-eng", "author-kor", "ackowledgments"]
+        self.first_q = "title-English : \ntitle-Korean : \n\
+            author-English : \nauthor-Korean : \n\
+            ackowledgments : \n"
         
     def set_journal_list(self) :
         self.pdf_list = glob.glob(f'{self.path}/*.pdf')
@@ -30,7 +32,7 @@ class JournalMangaement :
         if journal.data_clensing_front() :
             journal.data_clensing_back()
                 
-        return journal.get_data() + f"해당 글을 {self.first_q} \n지금 너에게 준 형식들로 맞춰서 나에게 알려줘\n"
+        return journal.get_data() + f"해당 글을 {self.first_q} \n지금 너에게 준 형식들로 맞춰서 나에게 알려줘\n 없을 경우 None으로 표시해줘\n"
         
     def input_text(self, data) :
         response = openai.ChatCompletion.create(
@@ -41,13 +43,19 @@ class JournalMangaement :
             )
         return response.choices[0].message.content
     
+    def result_to_dictionary(self, path, result) : 
+        lines = result.split("\n")
+        data = {}
+        data["path"] = path
+        result = result.lower()
+        for idx, line in enumerate(lines)  : 
+            key, value = line.split(": ", 1)
+            data[self.key[idx]] = value
+        self.result_data.append(data)
+        print(data)
+    
     def run_ai(self) : 
         for path in self.pdf_list : 
             content = self.set_ai_content(path)
-            # print(f"\n\n {path}")
-            # print(content)
             result = self.input_text(content)
-            print(f"---------------------------------------\n")
-            print(result)
-            print("-----------------------------------------\n")
-            self.result_data.append({"path" : content, "data" : result})
+            self.result_to_dictionary(path, result)
