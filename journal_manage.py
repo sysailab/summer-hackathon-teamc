@@ -44,7 +44,10 @@ class JournalMangaement :
     def run_ai(self) : 
         for path in self.pdf_list : 
             content = self.set_ai_content(path)
-            print(f"\n\n {path}")
-            print(content)
-            # result = self.input_text(content)
-            #self.result_data.append({"path" : content, "data" : result})
+            # print(f"\n\n {path}")
+            # print(content)
+            result = self.input_text(content)
+            print(f"---------------------------------------\n")
+            print(result)
+            print("-----------------------------------------\n")
+            self.result_data.append({"path" : content, "data" : result})
