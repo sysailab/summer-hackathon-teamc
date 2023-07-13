@@ -1,7 +1,6 @@
 import fitz
 import os
-
-path = "./input"
+from config import *
 
 
 class text_read():
@@ -27,7 +26,7 @@ class text_read():
                     doc.close()
             return t_list
 
-        text_list = read_pdf(path)
+        text_list = read_pdf(INPUT_PATH)
 
       
 

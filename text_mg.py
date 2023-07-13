@@ -1,5 +1,6 @@
 from text_read import text_read
 from text_ai import text_ai
+import time
 
 
 class text_mg():
@@ -12,7 +13,7 @@ class text_mg():
         for i in range(len(text)):
             
             b_text = text_ai.main(text[i])
-
+            time.sleep(10)
             print(f"---------------------------------------\n")
             print(b_text)
             print("---------------------------------------\n")
