@@ -63,6 +63,7 @@ class Journal :
         return True
     
     def data_clensing_back(self) : 
+        ####수정
         bac_data = ""
         for page in reversed(self.back) :
             
@@ -79,13 +80,14 @@ class Journal :
                 continue
         
         self.data += bac_data
-    
+    """
     def convert_image_to_text(self, file) :
         text = pytesseract.image_to_string(file, lang="eng")
         return text
-        
+    """ 
     def image_to_text(self) :
         #Open ai 사용 #data에 front Data 추가
+        """
         imgs = convert_from_path(self.path)
         
         print(type(imgs[0]))
@@ -97,7 +99,9 @@ class Journal :
             if "reference" in text or "참고" in text :
                 self.data += data
                 break
+        """
 
     
     def get_data(self) :
+
         return self.data

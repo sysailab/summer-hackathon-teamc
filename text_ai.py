@@ -34,7 +34,6 @@ class text_ai():
         text += input_text(r_text)
         # print(text)
 
-        # print(text)
         return text
         
 
